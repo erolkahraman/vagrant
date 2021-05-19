@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+    - name: Update cache
+      apt:
+        update_cache: yes
+    - name: Install elinks
+      apt:
+        name: elinks
+        state: latest
