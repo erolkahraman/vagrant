@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Update repos..."
-apt update
+apt-get update
 
-echo "Install nodejs and npm..."
-apt install -y nodejs npm
+echo "Install elinks..."
+apt-get install elinks -y
