@@ -1,0 +1,20 @@
+require "yaml"
+settings = YAML.load_file "settings.yaml"
+
+NODE_NUM = settings["node"]["node_number"]
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/ubuntu2204"
+  config.vm.box_check_update = false
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = true
+    vb.memory = "1024"
+  end
+  (1..NODE_NUM).each do |i|
+    config.vm.define "node0#{i}" do |node|
+      node.vm.hostname = "node0#{i}"
+      node.vm.network "private_network", type: "dhcp"
+      node.vm.provision "shell", path: "./scripts/install.sh"
+    end
+  end
+end
